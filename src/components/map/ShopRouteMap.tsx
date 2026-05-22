@@ -110,7 +110,7 @@ export default function ShopRouteMap({ shopName, latitude, longitude }: Props) {
               Route error
             </span>
           ) : (
-            <span className="text-[11px] text-muted-foreground">Live route powered by OpenRouteService</span>
+            <span className="text-[11px] text-muted-foreground">Live route powered by OSRM</span>
           )}
         </div>
       </div>

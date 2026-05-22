@@ -1,5 +1,5 @@
-// Proxy edge function for OpenRouteService directions API.
-// Keeps ORS_API_KEY secret on the server.
+// Proxy edge function for OSRM directions API.
+// Uses OSRM public routing so distance/time work without an ORS_API_KEY secret.
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Map profiles to OSRM profile names
+    // Map legacy ORS profile names to OSRM profile names.
     const profileMap: Record<string, string> = {
       "driving-car": "driving",
       "foot-walking": "foot",
