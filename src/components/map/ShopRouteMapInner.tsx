@@ -30,10 +30,11 @@ function FitBounds({ shopPos, userPos, routeCoords }: Omit<Props, "shopName">) {
 
 export default function ShopRouteMapInner({ shopPos, userPos, routeCoords, shopName }: Props) {
   return (
-    <MapContainer center={shopPos} zoom={14} scrollWheelZoom className="h-full w-full">
+    <MapContainer center={shopPos} zoom={17} scrollWheelZoom maxZoom={19} className="h-full w-full">
       <TileLayer
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        maxZoom={19}
       />
       <Marker position={shopPos} icon={shopIcon}>
         <Popup>
