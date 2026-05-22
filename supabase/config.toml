@@ -1,13 +1,1 @@
-project_id = "hiffyxynwduxidgvkbuv"
-
-[functions.marketplace-assistant]
-verify_jwt = false
-
-[functions.ors-route]
-verify_jwt = false
-
-[functions.personalized-discover]
-verify_jwt = false
-
-[functions.generate-instagram-content]
-verify_jwt = false
+project_id = "kcckvelanyijsojwqotw"
