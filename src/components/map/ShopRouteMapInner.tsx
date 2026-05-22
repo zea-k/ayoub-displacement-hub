@@ -19,10 +19,10 @@ function FitBounds({ shopPos, userPos, routeCoords }: Omit<Props, "shopName">) {
         ? [shopPos, userPos]
         : [shopPos];
     if (points.length === 1) {
-      map.setView(points[0], 15);
+      map.setView(points[0], 18);
     } else {
       const bounds = L.latLngBounds(points.map((p) => L.latLng(p[0], p[1])));
-      map.fitBounds(bounds, { padding: [40, 40] });
+      map.fitBounds(bounds, { padding: [30, 30], maxZoom: 17 });
     }
   }, [shopPos[0], shopPos[1], userPos?.[0], userPos?.[1], routeCoords?.length]);
   return null;
@@ -30,10 +30,11 @@ function FitBounds({ shopPos, userPos, routeCoords }: Omit<Props, "shopName">) {
 
 export default function ShopRouteMapInner({ shopPos, userPos, routeCoords, shopName }: Props) {
   return (
-    <MapContainer center={shopPos} zoom={14} scrollWheelZoom className="h-full w-full">
+    <MapContainer center={shopPos} zoom={17} scrollWheelZoom maxZoom={19} className="h-full w-full">
       <TileLayer
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        maxZoom={19}
       />
       <Marker position={shopPos} icon={shopIcon}>
         <Popup>

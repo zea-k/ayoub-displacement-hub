@@ -27,49 +27,46 @@ Deno.serve(async (req) => {
       );
     }
 
-    const allowedProfiles = ["driving-car", "foot-walking", "cycling-regular"];
-    const useProfile = allowedProfiles.includes(profile) ? profile : "driving-car";
+    // Map profiles to OSRM profile names
+    const profileMap: Record<string, string> = {
+      "driving-car": "driving",
+      "foot-walking": "foot",
+      "cycling-regular": "cycling",
+    };
+    const osrmProfile = profileMap[profile] ?? "driving";
 
-    const apiKey = Deno.env.get("ORS_API_KEY");
-    if (!apiKey) {
+    // Use the public OSRM demo server — no API key required.
+    // Coordinates format: {lng},{lat};{lng},{lat}
+    const url =
+      `https://router.project-osrm.org/route/v1/${osrmProfile}/` +
+      `${start[0]},${start[1]};${end[0]},${end[1]}` +
+      `?overview=full&geometries=geojson&alternatives=false&steps=false`;
+
+    const osrmRes = await fetch(url, {
+      headers: { Accept: "application/json" },
+    });
+    const data = await osrmRes.json();
+
+    if (!osrmRes.ok || data?.code !== "Ok" || !data?.routes?.length) {
       return new Response(
-        JSON.stringify({ error: "ORS_API_KEY not configured" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        JSON.stringify({
+          error: data?.message || data?.code || "Routing failed",
+          details: data,
+        }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
-    const orsRes = await fetch(
-      `https://api.openrouteservice.org/v2/directions/${useProfile}/geojson`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: apiKey,
-          "Content-Type": "application/json",
-          Accept: "application/json, application/geo+json",
-        },
-        body: JSON.stringify({ coordinates: [start, end] }),
-      },
-    );
-
-    const data = await orsRes.json();
-    if (!orsRes.ok) {
-      return new Response(
-        JSON.stringify({ error: data?.error?.message || "Routing failed", details: data }),
-        { status: orsRes.status, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
-    }
-
-    const feature = data?.features?.[0];
-    const coords: [number, number][] = (feature?.geometry?.coordinates || []).map(
+    const route = data.routes[0];
+    const coords: [number, number][] = (route.geometry?.coordinates || []).map(
       (c: number[]) => [c[1], c[0]] as [number, number], // -> [lat, lng] for Leaflet
     );
-    const summary = feature?.properties?.summary || {};
 
     return new Response(
       JSON.stringify({
         coords,
-        distance_m: summary.distance ?? 0,
-        duration_s: summary.duration ?? 0,
+        distance_m: route.distance ?? 0,
+        duration_s: route.duration ?? 0,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
