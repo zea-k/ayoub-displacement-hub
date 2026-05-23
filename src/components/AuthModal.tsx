@@ -191,7 +191,7 @@ export default function AuthModal({ open, onOpenChange, defaultView = "login" }:
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={1}
                 placeholder="••••••••"
                 className="h-12 bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-2xl focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 transition-all"
               />

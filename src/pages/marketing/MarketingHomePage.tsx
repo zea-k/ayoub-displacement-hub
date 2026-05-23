@@ -57,13 +57,16 @@ export default function MarketingHomePage() {
     if (!container) return;
 
     const tl = gsap.timeline({
+      defaults: { ease: "none", force3D: true },
       scrollTrigger: {
         trigger: container,
         start: "top top",
-        end: `+=${slides.length * 120}%`,
-        scrub: true,
+        end: `+=${slides.length * 100}%`,
+        scrub: 0.6,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const nextIndex = Math.min(
             slides.length - 1,
@@ -84,9 +87,10 @@ export default function MarketingHomePage() {
 
       gsap.set(current, {
         autoAlpha: index === 0 ? 1 : 0,
-        scale: index === 0 ? 1 : 1.08,
-        filter: index === 0 ? "blur(0px)" : "blur(10px)",
+        scale: index === 0 ? 1 : 1.04,
         zIndex: index === 0 ? 5 : 1,
+        willChange: "transform, opacity",
+        force3D: true,
       });
 
       if (index > 0) {
@@ -96,10 +100,8 @@ export default function MarketingHomePage() {
           previous,
           {
             autoAlpha: 0,
-            scale: 0.95,
-            filter: "blur(10px)",
+            scale: 0.97,
             duration: 1,
-            ease: "power2.inOut",
           },
           `slide${index}`
         )
@@ -109,17 +111,14 @@ export default function MarketingHomePage() {
             current,
             {
               autoAlpha: 0,
-              scale: 1.08,
-              filter: "blur(10px)",
-              y: 30,
+              scale: 1.04,
+              y: 20,
             },
             {
               autoAlpha: 1,
               scale: 1,
-              filter: "blur(0px)",
               y: 0,
               duration: 1,
-              ease: "power2.out",
             },
             `slide${index}`
           );
