@@ -202,32 +202,31 @@ export default function MarketplacePage() {
 
   return (
     <MarketShell active="shops">
-      {/* Premium Apple-style hero with dashboard palette (primary + accent) */}
-      <section className="relative overflow-hidden px-4 pt-16 sm:pt-24 pb-20 sm:pb-28 text-center apple-surface">
+      {/* Compact hero — less text, bigger map */}
+      <section className="relative overflow-hidden px-4 pt-10 sm:pt-14 pb-6 text-center apple-surface">
         {/* Ambient color washes echoing dashboard theme */}
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/25 blur-[120px]" />
-          <div className="absolute -top-20 right-0 h-[360px] w-[360px] rounded-full bg-accent/20 blur-[110px]" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[260px] w-[640px] rounded-full bg-primary/10 blur-[100px]" />
+          <div className="absolute -top-20 -left-16 h-[280px] w-[280px] rounded-full bg-primary/20 blur-[90px]" />
+          <div className="absolute -top-12 right-0 h-[240px] w-[240px] rounded-full bg-accent/15 blur-[80px]" />
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-card/70 border border-primary/30 text-primary text-xs sm:text-sm font-semibold mb-7 backdrop-blur-md shadow-sm">
-            <Sparkles className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/70 border border-primary/30 text-primary text-xs font-semibold mb-4 backdrop-blur-md shadow-sm">
+            <Sparkles className="h-3.5 w-3.5" />
             {t("market.trustedMarketplace")}
           </div>
-          <h1 className="font-heading text-4xl sm:text-6xl font-bold mb-5 leading-[1.05] tracking-tight text-foreground text-balance-heading">
+          <h1 className="font-heading text-2xl sm:text-3xl font-bold mb-2 leading-tight tracking-tight text-foreground text-balance-heading">
             {t("market.buyFromTrusted")}
           </h1>
-          <p className="text-muted-foreground text-sm sm:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-sm max-w-xl mx-auto leading-relaxed mb-5">
             {t("market.buyFromTrustedShort") || "Buy from trusted shops near you."}
           </p>
 
-          <div className="relative max-w-xl mx-auto mb-10">
+          <div className="relative max-w-md mx-auto mb-6">
             {!searchOpen ? (
               <button
                 type="button"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-white/90 px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-white/90 px-4 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
                 onClick={handleSearchToggle}
               >
                 <Search className="h-4 w-4" />
@@ -244,7 +243,7 @@ export default function MarketplacePage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onBlur={handleSearchBlur}
                     placeholder={t("market.searchPlaceholder")}
-                    className="pl-14 h-14 rounded-2xl bg-transparent border-0 text-foreground placeholder:text-muted-foreground text-base focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="pl-14 h-12 rounded-2xl bg-transparent border-0 text-foreground placeholder:text-muted-foreground text-base focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
                 </div>
               </form>
@@ -252,12 +251,12 @@ export default function MarketplacePage() {
           </div>
 
           <div className="text-left">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-primary" /> Nearby shops
+                <h2 className="text-base font-semibold text-foreground flex items-center gap-1.5">
+                  <MapPin className="h-4 w-4 text-primary" /> Nearby shops
                 </h2>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs text-muted-foreground mt-0.5">
                   {t("market.nearbyShopsSubtitle") || "Browse nearby shops on the map, then continue below."}
                 </p>
               </div>
@@ -269,7 +268,7 @@ export default function MarketplacePage() {
               )}
             </div>
 
-            <Card className="overflow-hidden mt-6 h-[360px]">
+            <Card className="overflow-hidden mt-3 h-[460px] sm:h-[520px]">
               <Suspense
                 fallback={
                   <div className="h-full flex items-center justify-center">
@@ -290,7 +289,7 @@ export default function MarketplacePage() {
             </Card>
           </div>
         </div>
-</section>
+      </section>
 
       <FeaturedShops shops={featuredShops} loading={loading} onShopClick={handleShopClick} />
 
