@@ -96,33 +96,37 @@ export default function MarketingHomePage() {
       if (index > 0) {
         const previous = slideRefs.current[index - 1];
 
+        // Hard-ish swap: previous fades out fast, current fades in fast,
+        // with no overlap window — prevents text from stacking visually.
         tl.to(
           previous,
           {
             autoAlpha: 0,
-            scale: 0.97,
-            duration: 1,
+            scale: 0.98,
+            duration: 0.4,
+            ease: "power2.in",
           },
           `slide${index}`
         )
-          .set(previous, { zIndex: 1 }, `slide${index}+=0.1`)
-          .set(current, { zIndex: 5 }, `slide${index}`)
+          .set(previous, { zIndex: 1 })
+          .set(current, { zIndex: 5 })
           .fromTo(
             current,
             {
               autoAlpha: 0,
-              scale: 1.04,
-              y: 20,
+              scale: 1.02,
             },
             {
               autoAlpha: 1,
               scale: 1,
-              y: 0,
-              duration: 1,
+              duration: 0.4,
+              ease: "power2.out",
             },
-            `slide${index}`
-          );
+            `slide${index}+=0.4`
+          )
+          .to({}, { duration: 0.6 }, `slide${index}+=0.8`);
       }
+
     });
 
     return () => {
