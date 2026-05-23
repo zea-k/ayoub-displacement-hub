@@ -390,8 +390,11 @@ export default function PublicStorePage() {
           submitting={submitting}
         />
       )}
+        </div>
+      </div>
     </div>
   );
+
 }
 
 // Keep the old order dialog for direct "Order Now" from product detail
