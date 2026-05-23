@@ -277,22 +277,15 @@ export default function MarketplacePage() {
                   </div>
                 }
               >
-                {nearbyShops.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center text-sm text-muted-foreground px-6 text-center">
-                    <p>No nearby shop coordinates available yet.</p>
-                    <p className="mt-2">Share your location to see shops on the map.</p>
-                  </div>
-                ) : (
-                  <NearbyMapInner
-                    userLocation={location}
-                    shops={nearbyShops.map((shop) => ({
-                      slug: shop.slug,
-                      name: shop.business_name,
-                      lat: shop.latitude,
-                      lng: shop.longitude,
-                    }))}
-                  />
-                )}
+                <NearbyMapInner
+                  userLocation={location}
+                  shops={nearbyShops.map((shop) => ({
+                    slug: shop.slug,
+                    name: shop.business_name,
+                    lat: shop.latitude,
+                    lng: shop.longitude,
+                  }))}
+                />
               </Suspense>
             </Card>
           </div>
