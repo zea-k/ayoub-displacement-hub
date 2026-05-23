@@ -136,8 +136,11 @@ export default function MarketingHomePage() {
   }, [slides.length]);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground">
-      <div ref={containerRef} className="relative h-screen">
+    <main className="min-h-screen overflow-hidden bg-background text-foreground p-2 sm:p-3 lg:p-4">
+      {/* Premium gradient frame */}
+      <div className="relative rounded-[1.75rem] p-[1.5px] bg-[conic-gradient(from_140deg_at_50%_50%,hsl(var(--primary)/0.55),hsl(var(--accent)/0.45),hsl(var(--primary)/0.15),hsl(var(--accent)/0.5),hsl(var(--primary)/0.55))] shadow-[0_30px_80px_-30px_hsl(var(--primary)/0.45),0_10px_40px_-20px_hsl(var(--accent)/0.35)]">
+        <div ref={containerRef} className="relative h-[calc(100vh-1rem)] sm:h-[calc(100vh-1.5rem)] lg:h-[calc(100vh-2rem)] overflow-hidden rounded-[1.65rem] ring-1 ring-white/10">
+
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background" />
 
