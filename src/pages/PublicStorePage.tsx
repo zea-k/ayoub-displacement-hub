@@ -263,7 +263,10 @@ export default function PublicStorePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground relative overflow-hidden">
+    <div className="min-h-screen bg-background p-2 sm:p-3 lg:p-4">
+      <div className="relative rounded-[1.75rem] p-[1.5px] bg-[conic-gradient(from_140deg_at_50%_50%,hsl(var(--primary)/0.55),hsl(var(--accent)/0.45),hsl(var(--primary)/0.15),hsl(var(--accent)/0.5),hsl(var(--primary)/0.55))] shadow-[0_30px_80px_-30px_hsl(var(--primary)/0.45),0_10px_40px_-20px_hsl(var(--accent)/0.35)]">
+        <div className="relative overflow-hidden rounded-[1.65rem] ring-1 ring-white/10 bg-gradient-to-br from-background via-background/95 to-background/90 text-foreground">
+
       {/* Premium Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-20 blur-[150px] bg-gradient-to-br from-primary/30 to-accent/20" />
