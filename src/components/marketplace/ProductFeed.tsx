@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Heart, ShoppingCart, MessageCircle, Store, ArrowRight, Bookmark, Send } from "lucide-react";
 import { useProductReactions } from "@/hooks/useProductReactions";
 import { Input } from "@/components/ui/input";
+import { CloudinaryImage } from "@/components/ui/CloudinaryImage";
 
 export interface DiscoverProduct {
   id: string;
@@ -132,11 +133,13 @@ function FeedCard({ product, index }: { product: DiscoverProduct; index: number 
       {/* Image */}
       <Link to={`/market/shop/${product.shop_slug}`} className="block bg-muted">
         {product.image_url ? (
-          <img
+          <CloudinaryImage
             src={product.image_url}
             alt={product.name}
-            className="w-full max-h-[520px] object-cover object-center"
-            loading="lazy"
+            width={960}
+            sizes="(max-width: 768px) 100vw, 640px"
+            aspect="aspect-[4/5]"
+            className="max-h-[520px]"
           />
         ) : (
           <div className="flex h-72 items-center justify-center bg-muted text-muted-foreground">
